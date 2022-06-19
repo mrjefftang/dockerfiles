@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@v1.4.3
+        uses: step-security/harden-runner@v1
         with:
           egress-policy: audit
           disable-telemetry: true
@@ -45,7 +45,7 @@ jobs:
 
       - name: Set Docker metadata
         id: docker_meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: ${{ env.REPOSITORY }}
           tags: |
@@ -99,10 +99,10 @@ jobs:
       # https://github.com/anchore/syft
 
       - name: Install cosign
-        uses: sigstore/cosign-installer@7e0881f8fe90b25e305bbf0309761e9314607e25 # v1.4.1
+        uses: sigstore/cosign-installer@v2
 
       - name: Install syft
-        uses: anchore/sbom-action/download-syft@bb716408e75840bbb01e839347cd213767269d4a # v0.6.0
+        uses: anchore/sbom-action/download-syft@v0
 
       - name: Sign the image digest and generate SBOM
         run: |
@@ -115,14 +115,14 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: 1
 
-        #syft attest -o syft-json docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
-        #syft attest -o syft-json ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
 
       - name: Verify the image digest and SBOM
         run: |
           cosign verify docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
           cosign verify-attestation docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+          syft attest -o syft-json docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
           cosign verify ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
           cosign verify-attestation ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+          syft attest -o syft-json ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
         env:
           COSIGN_EXPERIMENTAL: 1
