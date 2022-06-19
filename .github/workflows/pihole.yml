@@ -19,7 +19,7 @@ env:
 permissions: read-all
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     permissions:
       packages: write
