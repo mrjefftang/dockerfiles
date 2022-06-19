@@ -5,7 +5,7 @@ on:
     branches: 
       - master
     paths:
-      - pihole/*
+      - pihole/**
       - .github/workflows/pihole.yml
   workflow_dispatch:
   schedule:
