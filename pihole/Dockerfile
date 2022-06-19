@@ -1,5 +1,7 @@
 FROM pihole/pihole:latest
 
+EXPOSE 22/tcp
+
 VOLUME /etc/gravity-sync
 
 COPY s6/debian-root /
