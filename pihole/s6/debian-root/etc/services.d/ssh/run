@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bash
+s6-echo "Starting sshd"
+
+s6-mkdir -p -m 750 /run/sshd
+
+if [[ -f /root/.ssh/authorized_keys ]]; then
+    s6-echo "Disabling root password login"
+    passwd -dl root
+    sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+else
+    s6-echo "Setting root password: ${WEBPASSWD}"
+    echo "root:${WEBPASSWD}" | chpasswd
+    sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+fi
+
+fdmove -c 2 1 /usr/sbin/sshd -D -e

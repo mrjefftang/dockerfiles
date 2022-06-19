@@ -1,0 +1,1 @@
+@hourly root /bin/bash /usr/local/bin/gravity-sync
