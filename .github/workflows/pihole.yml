@@ -137,13 +137,13 @@ jobs:
           COSIGN_EXPERIMENTAL: 1
 
 
-      #- name: Verify the image digest and SBOM
-      #  run: |
-      #    cosign verify docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
-      #    cosign verify-attestation docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
-      #    syft attest -o syft-json docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
-      #    cosign verify ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
-      #    cosign verify-attestation ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
-      #    syft attest -o syft-json ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
-      #  env:
-      #    COSIGN_EXPERIMENTAL: 1
+      - name: Verify the image digest and SBOM
+        run: |
+          cosign verify docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+          cosign verify-attestation docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+          syft attest -o syft-json docker.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+          cosign verify ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+          cosign verify-attestation ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+          syft attest -o syft-json ghcr.io/${{ env.REPOSITORY }}@${{ steps.push-step.outputs.digest }}
+        env:
+          COSIGN_EXPERIMENTAL: 1
