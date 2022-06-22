@@ -7,7 +7,8 @@ ARG REPO=https://github.com/eliteSchwein/mooncord
 ARG BRANCH=master
 
 WORKDIR /srv
-RUN apk add --no-cache tini ffmpeg
+
+RUN apk add --no-cache git
 
 # Checkout project
 RUN git clone -b ${BRANCH} ${REPO}
