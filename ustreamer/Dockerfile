@@ -67,5 +67,6 @@ CMD /srv/ustreamer/ustreamer \
         --workers=${VIDEO_WORKERS} \
         --persistent \
         --drop-same-frames=${VIDEO_SKIP} \
+        --allow=origin=\* \
         --slowdown
 
