@@ -18,7 +18,7 @@ RUN git clone -b ${TIMELAPSE_BRANCH} ${TIMELAPSE_REPO}
 RUN git clone -b ${KLIPPER_BRANCH} ${KLIPPER_REPO}
 RUN python -m venv venv && \
     venv/bin/pip install -r moonraker/scripts/moonraker-requirements.txt && \
-    cp moonraker-timelapse/component/timelapse.py moonraker/moonraker/components/timelapse.py
+    ln -s /srv/moonraker-timelapse/component/timelapse.py /srv/moonraker/moonraker/components/timelapse.py
 
 # =====================================
 # Runtime
@@ -33,7 +33,9 @@ ENV MOONRAKER_CFG=/data/moonraker/moonraker.cfg
 RUN apt update && \
     apt install -y \
         curl \
+        git \
         ffmpeg \
+        iproute2 \
         libcurl4-openssl-dev \
         libgpiod2 \
         libopenjp2-7 \
