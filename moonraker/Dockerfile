@@ -51,6 +51,7 @@ RUN apt update && \
 RUN useradd -m -G dialout,tty moonraker
 
 WORKDIR /srv
+COPY --chown=moonraker:moonraker --from=build /srv/moonraker-timelapse ./moonraker-timelapse
 COPY --chown=moonraker:moonraker --from=build /srv/moonraker ./moonraker
 COPY --chown=moonraker:moonraker --from=build /srv/klipper ./klipper
 COPY --chown=moonraker:moonraker --from=build /srv/venv ./venv
