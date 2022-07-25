@@ -1,4 +1,4 @@
-FROM homeassistant/raspberrypi4-homeassistant:stable
+FROM homeassistant/raspberrypi4-64-homeassistant:stable
 
 # Install avahi-daemon in container
 # https://gnanesh.me/avahi-docker-non-root.html
