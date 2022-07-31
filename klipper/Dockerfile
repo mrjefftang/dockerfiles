@@ -53,7 +53,7 @@ COPY mcu.config klipper/.config
 RUN cd klipper && \
     make clean && \
     make && \
-    mv out/klipper.elf firmware/linux_mcu && \
+    mv out/klipper.elf linux_mcu && \
     make distclean
 
 COPY skr-1.4.config klipper/.config
