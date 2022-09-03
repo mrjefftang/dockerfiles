@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . .
 
+RUN find .
+
 RUN npm ci
 RUN npm run build
 
