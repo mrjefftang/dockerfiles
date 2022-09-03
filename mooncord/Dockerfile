@@ -35,5 +35,5 @@ WORKDIR /srv
 COPY --chown=mooncord --from=build /srv/mooncord /srv/mooncord
 
 USER mooncord:tty
-ENTRYPOINT /sbin/tini --
+ENTRYPOINT /usr/bin/tini --
 CMD node /srv/mooncord/dist/index.js
