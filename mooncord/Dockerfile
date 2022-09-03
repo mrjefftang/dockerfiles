@@ -1,39 +1,23 @@
-# =====================================
-# Build
-# =====================================
-FROM node:16-bullseye as build
+FROM node:16-alpine as builder
 
-ARG REPO=https://github.com/eliteSchwein/mooncord
-ARG BRANCH=master
+WORKDIR /app
 
-WORKDIR /srv
+COPY . .
 
-# Checkout project
-RUN git clone -b ${BRANCH} ${REPO}
-WORKDIR mooncord
 RUN npm ci
 RUN npm run build
 
-# =====================================
-# Runtime
-# =====================================
-FROM node:16-bullseye as run
+FROM node:16-alpine
 
-VOLUME /data
+WORKDIR /app
 
-# Install system dependencies
-RUN apt update && \
-    apt install -y \
-        ffmpeg \
-        tini && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache tini ffmpeg
 
-RUN useradd -m -G tty mooncord
+# Since dist/ will not contain everything needed to run Mooncord, copy all of /app for now
+COPY --from=builder /app/ /app/
 
-WORKDIR /srv
-COPY --chown=mooncord --from=build /srv/mooncord /mooncord
+USER node
 
-USER mooncord:tty
-ENTRYPOINT /tini --
-CMD node /srv/mooncord/dist/index.js
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD ["node", "/app/dist/index.js"]
+
