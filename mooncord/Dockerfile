@@ -18,7 +18,7 @@ RUN npm run build
 # Runtime
 # =====================================
 FROM node:16-bullseye as run
-ENV CONFIG_PATH=/data/mooncord
+ENV MOONCORD_CFG=/data/mooncord
 
 
 VOLUME /data
@@ -37,4 +37,4 @@ WORKDIR /srv
 COPY --chown=mooncord --from=build /srv/mooncord /srv/mooncord
 
 USER mooncord:tty
-CMD node /srv/mooncord/dist/index.js ${CONFIG_PATH}
+CMD node /srv/mooncord/dist/index.js ${MOONCORD_CFG}
