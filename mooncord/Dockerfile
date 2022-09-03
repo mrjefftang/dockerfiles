@@ -26,8 +26,7 @@ VOLUME /data
 # Install system dependencies
 RUN apt update && \
     apt install -y \
-        ffmpeg \
-        tini && \
+        ffmpeg && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
