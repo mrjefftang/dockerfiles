@@ -6,8 +6,6 @@ VOLUME /etc/gravity-sync
 
 COPY s6/debian-root /
 
-RUN chmod +x /etc/services.d/ssh/run
-
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt -y install \
         curl \
         git \
