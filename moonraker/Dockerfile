@@ -27,6 +27,9 @@ FROM python:3.9-slim as run
 EXPOSE 7125/tcp
 VOLUME /data
 
+ENV MOONRAKER_DIR=/data/moonraker/
+ENV MOONRAKER_LOG=/data/moonraker/log
+ENV MOONRAKER_DB=/data/moonraker/database
 ENV MOONRAKER_CFG=/data/moonraker/moonraker.cfg
 
 # Install system dependencies
@@ -57,4 +60,4 @@ COPY --chown=moonraker:moonraker --from=build /srv/klipper ./klipper
 COPY --chown=moonraker:moonraker --from=build /srv/venv ./venv
 
 USER moonraker:dialout
-CMD /srv/venv/bin/python moonraker/moonraker/moonraker.py -c ${MOONRAKER_CFG}
+CMD /srv/venv/bin/python moonraker/moonraker/moonraker.py -c ${MOONRAKER_CFG} -n ${MOONRAKER_DIR} -d ${MOONRAKER_DB} -l ${MOONRAKER_LOG}
