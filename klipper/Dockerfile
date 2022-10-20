@@ -99,6 +99,7 @@ FROM python:3 as run
 VOLUME /data
 
 ENV KLIPPER_CFG=/data/klipper/printer.cfg
+ENV KLIPPER_LOG=/data/logs/klippy.log
 ENV KLIPPER_TTY=/data/klipper.tty
 ENV KLIPPER_API=/data/klipper.sock
 
