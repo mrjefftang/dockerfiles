@@ -10,16 +10,12 @@ WORKDIR /srv
 
 # Checkout project
 RUN git clone -b ${BRANCH} ${REPO}
-WORKDIR mooncord
-RUN npm ci
-RUN npm run build
 
 # =====================================
 # Runtime
 # =====================================
 FROM node:16-bullseye as run
 ENV MOONCORD_CFG=/data/mooncord
-
 
 VOLUME /data
 
