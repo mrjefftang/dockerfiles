@@ -42,8 +42,7 @@ RUN python -m venv venv && \
     venv/bin/pip install -r klipper/scripts/klippy-requirements.txt && \
     venv/bin/pip install numpy matplotlib && \
     venv/bin/python -m compileall klipper/klippy && \
-    venv/bin/python klipper/klippy/chelper/__init__.py && \
-    sed -i 's|python2|../venv/bin/python|g' klipper/Makefile
+    venv/bin/python klipper/klippy/chelper/__init__.py
 
 # Create a firmware folder to store images
 RUN mkdir klipper/firmware
