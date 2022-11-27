@@ -1,7 +1,7 @@
 # =====================================
 # Build
 # =====================================
-FROM python:3 as build
+FROM python:3.10 as build
 
 ARG REPO=https://github.com/Klipper3d/klipper
 ARG BRANCH=master
@@ -93,7 +93,7 @@ RUN cd klipper && \
 # =====================================
 # Runtime
 # =====================================
-FROM python:3 as run
+FROM python:3.10 as run
 
 VOLUME /data
 
