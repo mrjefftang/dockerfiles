@@ -18,6 +18,7 @@ RUN git clone -b ${TIMELAPSE_BRANCH} ${TIMELAPSE_REPO}
 RUN git clone -b ${KLIPPER_BRANCH} ${KLIPPER_REPO}
 RUN python -m venv venv && \
     venv/bin/pip install -r moonraker/scripts/moonraker-requirements.txt && \
+    venv/bin/pip install gpiod && \
     ln -s /srv/moonraker-timelapse/component/timelapse.py /srv/moonraker/moonraker/components/timelapse.py
 
 # =====================================
