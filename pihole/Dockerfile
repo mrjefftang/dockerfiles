@@ -14,4 +14,4 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt -y install \
         sudo && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl -sSL http://gravity.vmstan.com/beta | GS_DOCKER=1 bash
+RUN curl -sSL https://raw.githubusercontent.com/vmstan/gs-install/main/gs-install.sh | GS_DOCKER=1 bash
