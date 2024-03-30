@@ -17,7 +17,7 @@ RUN apt-get update && apt -y install \
         libusb-1.0-0 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSLO https://github.com/hyperion-project/hyperion.ng/releases/download/2.0.16/Hyperion-2.0.16-Linux-armv7.deb && apt install ./Hyperion-2.0.16-Linux-armv7l.deb && rm Hyperion-2.0.16-Linux-armv7l.deb
+RUN curl -fsSLO https://github.com/hyperion-project/hyperion.ng/releases/download/2.0.16/Hyperion-2.0.16-Linux-armv7l.deb && apt install ./Hyperion-2.0.16-Linux-armv7.deb && rm Hyperion-2.0.16-Linux-armv7.deb
 
 WORKDIR /data
 
