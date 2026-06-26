@@ -10,7 +10,7 @@ USER root
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-RUN pip install --no-cache-dir "supernote[all]==${SUPERNOTE_VERSION}"
+RUN pip install --no-cache-dir "supernote[all]==${SUPERNOTE_VERSION}" "starlette==0.52.1"
 
 # Pre-create the data/config directories owned by the nonroot user (uid 65532)
 # so the distroless runtime, which has no shell to mkdir/chown, can use them.
