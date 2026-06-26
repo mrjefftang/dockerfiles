@@ -1,12 +1,12 @@
-name: hyperion.ng
+name: supernote
 
 on:
   push:
-    branches: 
-      - master
+    branches:
+      - main
     paths:
-      - dockerfiles/hyperion.ng/**
-      - .github/workflows/hyperion.ng.yml
+      - supernote/**
+      - .github/workflows/supernote.yml
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * 1"
@@ -14,7 +14,7 @@ on:
 env:
   BUILD_VERSION: "git"
   DOCKER_CLI_EXPERIMENTAL: enabled
-  REPOSITORY: ${{ github.actor }}/${{ github.workflow }} 
+  REPOSITORY: ${{ github.actor }}/${{ github.workflow }}
 
 permissions: read-all
 
@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Source checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
- 
+
       - name: Setup QEMU
         id: qemu
         uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
@@ -70,7 +70,7 @@ jobs:
         with:
           push: ${{ github.event_name != 'pull_request' }}
           context: ${{ github.workflow }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           build-args: |
             BUILD_VERSION
           cache-from: type=gha, scope=${{ github.workflow }}
