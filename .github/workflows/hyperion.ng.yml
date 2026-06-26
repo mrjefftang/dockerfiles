@@ -2,10 +2,10 @@ name: hyperion.ng
 
 on:
   push:
-    branches: 
-      - master
+    branches:
+      - main
     paths:
-      - dockerfiles/hyperion.ng/**
+      - hyperion.ng/**
       - .github/workflows/hyperion.ng.yml
   workflow_dispatch:
   schedule:
